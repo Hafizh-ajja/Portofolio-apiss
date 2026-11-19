@@ -5,6 +5,13 @@ export const navLinks = [
   { label: 'Kontak', href: '#kontak' },
 ]
 
+export const footerMarqueeItems = [
+  'MARI KOLABORASI',
+  'OPEN TO WORK',
+  'HAFIZH FAQOT',
+  'WEB DEVELOPER',
+]
+
 export const marqueeItems = [
   'WEB DEVELOPER',
   'FRONT-END',

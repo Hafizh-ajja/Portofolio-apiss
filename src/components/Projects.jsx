@@ -11,7 +11,14 @@ export default function Projects() {
 
         <div className="projects">
           {projects.map((project, i) => (
-            <Reveal key={project.title}>
+            <Reveal
+              key={project.title}
+              style={{
+                transitionDelay: `${i * 90}ms`,
+                '--from-x': i % 2 === 0 ? '-64px' : '64px',
+                '--from-r': i % 2 === 0 ? '-5deg' : '5deg',
+              }}
+            >
               <ProjectCard {...project} index={i} />
             </Reveal>
           ))}

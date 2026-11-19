@@ -10,7 +10,8 @@ export default function Tag({ children, index = 0 }) {
       style={{
         background: `var(--${color})`,
         color: color === 'purple' ? '#fff' : 'var(--ink)',
-        transform: `rotate(${rotate}deg)`,
+        '--tr': `${rotate}deg`,
+        '--td': `${index * 0.06}s`,
       }}
     >
       {children}

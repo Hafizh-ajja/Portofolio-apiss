@@ -1,10 +1,11 @@
-export default function Sticker({ color = 'yellow', rotate = 0, style = {}, children }) {
+export default function Sticker({ color = 'yellow', rotate = 0, delay = 0, style = {}, children }) {
   return (
     <div
       className="sticker"
       style={{
         background: `var(--${color})`,
-        transform: `rotate(${rotate}deg)`,
+        '--r': `${rotate}deg`,
+        '--delay': `${delay}s`,
         ...style,
       }}
     >

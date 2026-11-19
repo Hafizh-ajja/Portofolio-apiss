@@ -1,3 +1,7 @@
 export default function Footer() {
-  return <footer>© {new Date().getFullYear()} Nama Kamu — Dibuat dengan Kode & Kopi ✦</footer>
+  return (
+    <footer>
+      © {new Date().getFullYear()} Hafizh — Dibuat dengan Kode & Kopi <span className="spark">✦</span>
+    </footer>
+  )
 }

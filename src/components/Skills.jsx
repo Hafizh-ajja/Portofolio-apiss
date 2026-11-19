@@ -9,11 +9,13 @@ export default function Skills() {
       <div className="wrap">
         <SectionHeading tag="tools favorit" title="Skill & Tech Stack" />
 
-        <Reveal className="skill-groups">
+        <div className="skill-groups">
           {skillGroups.map((group, i) => (
-            <SkillCard key={group.title} title={group.title} tags={group.tags} index={i} />
+            <Reveal key={group.title} style={{ transitionDelay: `${i * 110}ms` }}>
+              <SkillCard title={group.title} tags={group.tags} index={i} />
+            </Reveal>
           ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   )
