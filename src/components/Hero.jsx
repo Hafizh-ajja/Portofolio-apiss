@@ -56,7 +56,7 @@ export default function Hero({ photoSrc = null }) {
                 >
                   {word.text}
                 </span>
-              ))}
+              ))}=
               <span className="word period" style={{ '--d': '0.58s' }}>
                 .
               </span>
@@ -85,14 +85,10 @@ export default function Hero({ photoSrc = null }) {
               {photoSrc ? (
                 <img src={photoSrc} alt="Foto Hafizh" />
               ) : (
-                <>
-                  Ganti dengan
-                  <br />
-                  foto kamu
-                </>
+                <div className="photo-placeholder" aria-hidden="true" />
               )}
             </div>
-            <div className="cap">— itu saya! —</div>
+            <div className="cap">— this me! —</div>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ export default function Tag({ children, index = 0 }) {
       className="tag"
       style={{
         background: `var(--${color})`,
-        color: color === 'purple' ? '#fff' : 'var(--ink)',
+        color: 'var(--on-accent)',
         '--tr': `${rotate}deg`,
         '--td': `${index * 0.06}s`,
       }}

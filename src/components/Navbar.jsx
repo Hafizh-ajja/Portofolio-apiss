@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ThemeToggle from './ThemeToggle'
 
 export default function Navbar({ links = [] }) {
   const [open, setOpen] = useState(false)
@@ -28,9 +29,13 @@ export default function Navbar({ links = [] }) {
           ))}
         </ul>
 
-        <a href="#kontak" className="nav-cta">
-          Hubungi Saya
-        </a>
+        <div className="nav-actions">
+          <ThemeToggle />
+
+          <a href="#kontak" className="nav-cta">
+            Hubungi Saya
+          </a>
+        </div>
 
         <button
           className={`burger ${open ? 'open' : ''}`}

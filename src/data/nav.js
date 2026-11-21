@@ -1,6 +1,7 @@
 export const navLinks = [
   { label: 'Tentang', href: '#tentang' },
   { label: 'Skill', href: '#skill' },
+  { label: 'Sertifikat', href: '#sertifikat' },
   { label: 'Proyek', href: '#proyek' },
   { label: 'Kontak', href: '#kontak' },
 ]
