@@ -7,7 +7,6 @@ import Certificates from './components/Certificates'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import TornDivider from './components/TornDivider'
 import ScrollProgress from './components/ScrollProgress'
 import IntroLoader from './components/IntroLoader'
 import { navLinks, marqueeItems, footerMarqueeItems } from './data/nav'
@@ -22,20 +21,10 @@ export default function App() {
       <Navbar links={navLinks} />
 
       <Hero photoSrc="/assets/me.jpeg" />
-      <TornDivider />
-
       <About />
-      <TornDivider />
-
       <Skills />
-      <TornDivider />
-
       <Certificates />
-      <TornDivider />
-
       <Projects />
-      <TornDivider />
-
       <Contact />
       <Marquee items={footerMarqueeItems} reverse alt />
       <Footer />
