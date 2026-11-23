@@ -10,7 +10,7 @@ export default function SkillCard({ title, tags, index = 0 }) {
       <h3 style={{ color: `var(--${headingColor})` }}>{title}</h3>
       <div className="tag-row">
         {tags.map((tag, i) => (
-          <Tag key={tag} index={i}>
+          <Tag key={tag} index={i} floatIndex={index * 10 + i}>
             {tag}
           </Tag>
         ))}

@@ -1,0 +1,101 @@
+/* ---------- COFFEE CUP — SECTION YUK NGOBROL ---------- */
+.coffee-cup{
+  --cup-size:clamp(112px, 13vw, 158px);
+  --cup-cream:#FFF4D6;
+  --cup-coffee:#5B2E17;
+  position:relative;
+  flex:0 0 auto;
+  order:-1;
+  width:var(--cup-size);
+  height:calc(var(--cup-size) * 1.05);
+  animation:cupBob 4.6s ease-in-out infinite;
+  pointer-events:none;
+}
+
+/* Uap */
+.coffee-steam{
+  position:absolute; left:16%; bottom:62%; width:68%; height:52%;
+  pointer-events:none;
+}
+.coffee-steam__wisp{
+  position:absolute; bottom:0;
+  width:10px; height:52%;
+  border-left:3px solid rgba(255,255,255,.9);
+  border-radius:50%;
+  opacity:0;
+  animation:steamRise 3.4s ease-in-out infinite;
+}
+.coffee-steam__wisp--1{ left:16%; --steam-sway:-9px; animation-delay:.1s; animation-duration:3.4s; }
+.coffee-steam__wisp--2{ left:47%; --steam-sway:7px; animation-delay:1.15s; animation-duration:3.9s; }
+.coffee-steam__wisp--3{ left:76%; --steam-sway:-5px; animation-delay:2.1s; animation-duration:3.1s; }
+
+/* Handle di belakang badan gelas */
+.coffee-cup__handle{
+  position:absolute; right:1%; top:29%; width:29%; height:36%;
+  border:6px solid var(--cup-cream);
+  border-radius:50%;
+  outline:2.5px solid var(--ink);
+  transform:rotate(-8deg);
+  z-index:0;
+}
+
+/* Badan gelas */
+.coffee-cup__body{
+  position:absolute; left:8%; bottom:10%; width:72%; height:62%;
+  background:linear-gradient(100deg, #FFF9E8 0%, var(--cup-cream) 58%, #F1D6A4 100%);
+  border:2.5px solid var(--ink);
+  border-radius:8px 8px 26px 26px / 6px 6px 20px 20px;
+  box-shadow:4px 4px 0 var(--ink);
+  z-index:1;
+}
+/* Permukaan kopi */
+.coffee-cup__coffee{
+  position:absolute; top:-3px; left:3%; width:94%; height:13px;
+  background:radial-gradient(ellipse at 38% 35%, #8A4E2A, var(--cup-coffee) 72%);
+  border:2px solid var(--ink);
+  border-radius:50%;
+}
+.coffee-cup__shine{
+  position:absolute; left:14%; top:28%; width:10%; height:34%;
+  background:rgba(255,255,255,.6);
+  border-radius:50px;
+  transform:rotate(8deg);
+}
+
+/* Piring */
+.coffee-cup__saucer{
+  position:absolute; left:-7%; bottom:0; width:114%; height:12%;
+  background:var(--cup-cream);
+  border:2.5px solid var(--ink);
+  border-radius:50%;
+  box-shadow:3px 3px 0 var(--ink);
+  z-index:2;
+}
+
+/* Keyframes */
+@keyframes cupBob{
+  0%,100%{ transform:translateY(0) rotate(-2deg); }
+  50%{ transform:translateY(-5px) rotate(1.5deg); }
+}
+@keyframes steamRise{
+  0%{ opacity:0; transform:translateY(11px) scale(.7) rotate(0deg); }
+  25%{ opacity:.9; }
+  60%{ opacity:.6; transform:translateY(-14px) scale(1) rotate(6deg); }
+  100%{
+    opacity:0;
+    transform:translateY(-32px) translateX(var(--steam-sway, 0px)) scale(1.15) rotate(-8deg);
+  }
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .coffee-cup{ --cup-size:126px; }
+}
+@media (max-width:640px){
+  .coffee-cup{ --cup-size:110px; }
+  .coffee-steam__wisp{ height:46%; }
+}
+@media (prefers-reduced-motion:reduce){
+  .coffee-cup,
+  .coffee-steam__wisp{ animation:none !important; }
+}

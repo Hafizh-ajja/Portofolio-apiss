@@ -1,4 +1,5 @@
 import Reveal from './Reveal'
+import CoffeeCup from './CoffeeCup'
 
 const links = [
   { label: 'hhafizh662@gmail.com', href: 'mailto:hhafizh662@gmail.com' },
@@ -15,14 +16,21 @@ export default function Contact() {
         <Reveal className="contact-box">
           <div className="halftone" style={{ opacity: 0.15 }} />
           <span className="contact-orb" aria-hidden="true" />
-          <h2>Yuk, ngobrol!</h2>
-          <p>Terbuka untuk kerja freelance, kontrak, maupun full-time.</p>
-          <div className="contact-links">
-            {links.map((link) => (
-              <a key={link.label} href={link.href}>
-                {link.label}
-              </a>
-            ))}
+
+          <div className="contact-inner">
+            <div className="contact-copy">
+              <h2>Yuk, ngobrol!</h2>
+              <p>Terbuka untuk kerja freelance, kontrak, maupun full-time.</p>
+              <div className="contact-links">
+                {links.map((link) => (
+                  <a key={link.label} href={link.href}>
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <CoffeeCup />
           </div>
         </Reveal>
       </div>

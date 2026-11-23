@@ -1,0 +1,264 @@
+/* ---------- DIGITAL ATOM / TECHNOLOGY ORBIT ----------
+   Orbit tipis + logo teknologi yang bergerak tepat di sepanjang jalurnya. */
+.digital-atom{
+  --atom-size:clamp(200px, 62vw, 360px);
+  --atom-cyan:#5EE7FF;
+  --orbit-radius:0.4;
+  --logo-base:38px;
+  --logo-featured:46px;
+  position:relative;
+  align-self:center;
+  width:var(--atom-size);
+  height:var(--atom-size);
+  margin:0 auto;
+  display:grid; place-items:center;
+  perspective:1000px;
+}
+/* Background atom memakai resep yang sama dengan background Hero:
+   4 radial gradient + dot halftone + shine sweep + glow, memakai variabel tema yang sama. */
+.digital-atom__backdrop{
+  position:absolute; inset:-4%; z-index:0;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.4);
+  background:
+    radial-gradient(38% 34% at 16% 20%, var(--atmo-1) 0%, transparent 72%),
+    radial-gradient(34% 32% at 84% 16%, var(--atmo-2) 0%, transparent 74%),
+    radial-gradient(42% 38% at 76% 82%, var(--atmo-3) 0%, transparent 72%),
+    radial-gradient(36% 34% at 20% 86%, var(--atmo-4) 0%, transparent 74%);
+  background-size:145% 145%;
+  box-shadow:inset 0 0 26px rgba(255,255,255,.14), 4px 4px 0 rgba(11,32,54,.12);
+  overflow:hidden;
+  pointer-events:none;
+  animation:atmosphereDrift 20s ease-in-out infinite alternate;
+}
+/* Glow lembut ala hero::after */
+.digital-atom__backdrop::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(240px circle at 50% 46%, var(--hero-glow), transparent 70%);
+  pointer-events:none;
+}
+/* Sapuan cahaya ala bg-atmosphere::after */
+.digital-atom__backdrop::after{
+  content:''; position:absolute; top:-35%; bottom:-35%; left:-60%; width:45%;
+  background:linear-gradient(90deg, transparent, var(--atmo-shine), transparent);
+  filter:blur(30px);
+  transform:skewX(-18deg);
+  opacity:0;
+  animation:atmosphereSweep 15s ease-in-out infinite;
+}
+.digital-atom__halftone{
+  position:absolute; inset:-28px;
+  background-image:radial-gradient(var(--atmo-dot) 1px, transparent 1.4px);
+  background-size:22px 22px;
+  opacity:.8;
+  animation:atmosphereDots 18s linear infinite;
+}
+.digital-atom__glow{
+  position:absolute; inset:10%; z-index:1;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(94,231,255,.2), rgba(58,166,255,.08) 45%, transparent 70%);
+  filter:blur(12px);
+  animation:atomGlow 5s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.digital-atom__spark{
+  position:absolute; z-index:6;
+  font-size:1rem; line-height:1; opacity:.55;
+  pointer-events:none;
+  animation:atomTwinkle 4s ease-in-out infinite;
+}
+.digital-atom__spark--a{ top:4%; left:6%; color:var(--yellow); }
+.digital-atom__spark--b{ bottom:8%; right:4%; color:var(--pink); animation-delay:1.4s; }
+
+.digital-atom__scene{
+  position:relative; z-index:2;
+  width:100%; height:100%;
+  transform-style:preserve-3d;
+}
+
+/* Bidang orbit miring — garisnya digambar tipis, warna mengikuti tiap orbit */
+.atom-orbit{
+  position:absolute; inset:0;
+  transform:rotateZ(var(--tilt-z)) rotateX(var(--tilt-x));
+  transform-style:preserve-3d;
+  pointer-events:none;
+}
+/* Radius garis = radius lintasan logo, supaya logo tampak berada tepat di jalurnya.
+   Tidak memakai properti opacity (bisa merusak preserve-3d / counter-transform logo). */
+.atom-orbit__spinner{
+  position:absolute;
+  inset:calc((1 - 2 * var(--orbit-radius)) * 50%);
+  border:1.5px solid var(--orbit-color, rgba(94,231,255,.7));
+  border-radius:50%;
+  box-shadow:0 0 6px var(--orbit-color, rgba(94,231,255,.7)), inset 0 0 5px rgba(255,255,255,.06);
+  animation:atomSpin var(--orbit-duration) linear infinite var(--spin-direction);
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.atom-orbit.is-paused .atom-orbit__spinner,
+.atom-orbit.is-paused .atom-electron__counter,
+.atom-orbit.is-paused .atom-logo{
+  animation-play-state:paused;
+}
+
+/* Posisi logo mengikuti lingkaran di bidang miring => tampak elips di layar */
+.atom-electron{
+  position:absolute; top:50%; left:50%;
+  width:var(--logo-size, var(--logo-base));
+  height:var(--logo-size, var(--logo-base));
+  margin-top:calc(var(--logo-size, var(--logo-base)) / -2);
+  margin-left:calc(var(--logo-size, var(--logo-base)) / -2);
+  transform:
+    rotate(var(--angle))
+    translateX(calc(var(--atom-size) * var(--orbit-radius)))
+    rotate(calc(-1 * var(--angle)));
+  transform-style:preserve-3d;
+  pointer-events:none;
+}
+/* Counter-transform: batalkan rotasi spinner, lalu kemiringan orbit.
+   Hasilnya logo selalu menghadap pengguna dengan proporsi aslinya. */
+.atom-electron__counter{
+  display:block; width:100%; height:100%;
+  animation:atomSpin var(--orbit-duration) linear infinite var(--counter-direction);
+  transform-style:preserve-3d;
+  will-change:transform;
+}
+.atom-electron__upright{
+  display:block; width:100%; height:100%;
+  transform:rotateX(calc(-1 * var(--tilt-x))) rotateZ(calc(-1 * var(--tilt-z)));
+  transform-style:preserve-3d;
+}
+
+/* Logo */
+.atom-logo{
+  position:relative;
+  display:grid; place-items:center;
+  width:100%; height:100%;
+  box-sizing:border-box;
+  padding:5px;
+  background:rgba(7,20,38,.8);
+  border:1.5px solid rgba(255,255,255,.55);
+  border-radius:13px;
+  box-shadow:0 5px 12px rgba(0,0,0,.28);
+  pointer-events:auto;
+  cursor:default;
+  transition:transform .24s cubic-bezier(.2,.8,.2,1), box-shadow .24s ease, border-color .24s ease;
+}
+.atom-logo svg{ display:block; width:100%; height:100%; }
+/* Depth ditempatkan di logo (bukan di ancestor 3D) supaya tidak merusak counter-transform */
+.atom-logo--depth-a{ animation:atomDepthA var(--orbit-duration) linear infinite var(--spin-direction); }
+.atom-logo--depth-b{ animation:atomDepthB var(--orbit-duration) linear infinite var(--spin-direction); }
+.atom-logo--glow{
+  box-shadow:0 5px 12px rgba(0,0,0,.28), 0 0 14px rgba(94,231,255,.45);
+}
+.atom-logo:hover{
+  transform:scale(1.12);
+  border-color:rgba(255,255,255,.95);
+  box-shadow:0 7px 16px rgba(0,0,0,.35), 0 0 20px rgba(94,231,255,.7);
+  z-index:3;
+}
+/* Tooltip nama teknologi */
+.atom-logo::after{
+  content:attr(data-label);
+  position:absolute; top:calc(100% + 6px); left:50%;
+  transform:translateX(-50%) translateY(-3px);
+  padding:3px 7px; border-radius:6px;
+  background:rgba(6,18,34,.95); color:#FFFFFF;
+  font-family:var(--heavy); font-size:.58rem; line-height:1.2; white-space:nowrap;
+  opacity:0; pointer-events:none;
+  transition:opacity .2s ease, transform .2s ease;
+}
+.atom-logo:hover::after{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* Nucleus — tidak ikut berputar */
+.atom-nucleus{
+  position:absolute; top:50%; left:50%; z-index:5;
+  width:clamp(52px, 16%, 68px); aspect-ratio:1;
+  transform:translate(-50%, -50%);
+  display:grid; place-items:center;
+  border-radius:50%;
+  background:radial-gradient(circle at 32% 28%, #FFFFFF 0%, var(--atom-cyan) 28%, var(--blue) 65%, #0B2A44 100%);
+  border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 0 16px rgba(94,231,255,.7), 0 0 34px rgba(58,166,255,.35);
+  animation:atomPulse 3.4s ease-in-out infinite;
+}
+.atom-nucleus__core{
+  font-family:var(--display); font-size:1.45rem; line-height:1;
+  color:#07203A;
+  text-shadow:0 1px 0 rgba(255,255,255,.45);
+}
+
+/* Keyframes */
+@keyframes atomSpin{
+  to{ transform:rotate(360deg); }
+}
+@keyframes atomDepthA{
+  0%,100%{ opacity:.92; }
+  25%{ opacity:.58; }
+  75%{ opacity:1; }
+}
+@keyframes atomDepthB{
+  0%,100%{ opacity:.92; }
+  25%{ opacity:1; }
+  75%{ opacity:.58; }
+}
+@keyframes atomPulse{
+  0%,100%{
+    transform:translate(-50%, -50%) scale(1);
+    box-shadow:0 0 16px rgba(94,231,255,.7), 0 0 34px rgba(58,166,255,.35);
+  }
+  50%{
+    transform:translate(-50%, -50%) scale(1.05);
+    box-shadow:0 0 22px rgba(94,231,255,.85), 0 0 44px rgba(58,166,255,.45);
+  }
+}
+@keyframes atomGlow{
+  from{ transform:scale(.94); opacity:.65; }
+  to{ transform:scale(1.06); opacity:1; }
+}
+@keyframes atomTwinkle{
+  0%,100%{ transform:translateY(0) rotate(0deg); opacity:.4; }
+  50%{ transform:translateY(-5px) rotate(14deg); opacity:.75; }
+}
+
+/* Responsive */
+@media (max-width:640px){
+  .digital-atom{
+    --atom-size:clamp(180px, 58vw, 240px);
+    --orbit-radius:0.38;
+    --logo-base:30px;
+    --logo-featured:36px;
+  }
+  .digital-atom__backdrop{ inset:-2%; border-radius:22px; }
+  .atom-logo{ padding:4px; border-radius:10px; }
+  .atom-logo::after{ font-size:.52rem; }
+  .atom-nucleus__core{ font-size:1.2rem; }
+  .digital-atom__spark{ display:none; }
+}
+
+/* Hover tidak nempel di perangkat tanpa cursor */
+@media (hover:none){
+  .atom-logo:hover{
+    transform:none;
+    box-shadow:0 5px 12px rgba(0,0,0,.28);
+  }
+  .atom-logo:hover::after{ opacity:0; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .digital-atom__backdrop,
+  .digital-atom__halftone,
+  .digital-atom__glow,
+  .digital-atom__spark,
+  .atom-orbit__spinner,
+  .atom-electron__counter,
+  .atom-logo,
+  .atom-nucleus{
+    animation:none !important;
+    will-change:auto;
+  }
+}
