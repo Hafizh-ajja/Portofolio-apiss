@@ -64,7 +64,7 @@ export default function Hero({ photoSrc = null }) {
           </h1>
 
           <p className="lead fade-up" style={{ '--d': '0.55s' }}>
-            Halo! Saya Hafizh, web developer yang suka mengemas kode jadi pengalaman visual
+            Halo! Saya Hafizh, seorang siswa dari sekolah developer indonesia. saya web developer yang suka mengemas kode jadi pengalaman visual
             yang hidup — bukan sekadar tampilan kaku di layar.
           </p>
 

@@ -13,7 +13,7 @@ export const certificates = [
     year: '2026',
     category: 'SQL',
     color: 'blue',
-    image: '/public/assets/sertikat sql_page-0001.jpg',
+    image: '/assets/sertifikat-sql.jpg',
   },
   {
     id: 'Belajar-Dasar-AI-&-Prompt-Engineering',
@@ -22,7 +22,7 @@ export const certificates = [
     year: '2025',
     category: 'AI',
     color: 'pink',
-    image: '/public/assets/sertifikat_dicoding_indonesia_page-0001.jpg',
+    image: '/assets/sertifikat_dicoding_indonesia_page-0001.jpg',
   },
   {
     id: 'Figma-UI/UX-Design',
@@ -31,7 +31,7 @@ export const certificates = [
     year: '2026',
     category: 'UI/UX',
     color: 'yellow',
-    image: '/public/assets/sertifikat-udmy-figma.jpg',
+    image: '/assets/sertifikat-udmy-figma.jpg',
   },
   // {
   //   id: 'react-fundamentals',
