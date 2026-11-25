@@ -1,6 +1,6 @@
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
-import DigitalAtom from './DigitalAtom'
+import CodingWorkspace from './CodingWorkspace'
 
 export default function About() {
   return (
@@ -21,7 +21,7 @@ export default function About() {
             </p>
           </div>
 
-          <DigitalAtom />
+          <CodingWorkspace />
         </Reveal>
       </div>
     </section>
